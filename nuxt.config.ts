@@ -153,6 +153,19 @@ export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
 
   devtools: { enabled: true },
+
+  // Runtime config
+  runtimeConfig: {
+    // Private keys (server-side only)
+    apiSecret: process.env.API_SECRET,
+
+    // Public keys (exposed to client)
+    public: {
+      baseUrl: process.env.NUXT_PUBLIC_BASE_URL || 'http://localhost:8080/api/v1',
+      appName: 'BeSoft Utility Payment',
+      appVersion: '1.0.0'
+    }
+  },
   modules: [
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',

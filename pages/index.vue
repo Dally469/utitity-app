@@ -1,269 +1,254 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-    <!-- Content -->
-    <div class="min-h-screen flex items-center justify-center p-4 md:p-8">
-      <div class="w-full max-w-7xl">
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
+  <div class="min-h-screen bg-white">
+    <!-- Split Screen Layout -->
+    <div class="min-h-screen grid lg:grid-cols-2">
 
-          <!-- Left Pane - Login Form -->
-          <div class="order-2 lg:order-1">
-            <div class="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-gray-200">
+      <!-- Left Pane - Image/Illustration -->
+      <div class="hidden lg:flex items-center justify-center bg-gray-50 p-12">
+        <div class="max-w-lg space-y-8">
+          <div class="text-center space-y-4">
+            <div class="inline-block">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=600&fit=crop&crop=face"
+                alt="Professional" class="w-64 h-64 rounded-full object-cover shadow-2xl mx-auto" />
+            </div>
+            <h2 class="text-3xl font-bold text-gray-900">Manage Your Utilities</h2>
+            <p class="text-lg text-gray-600">Pay bills seamlessly with real-time cashback on every payment</p>
+          </div>
 
-              <!-- Logo & Brand -->
-              <div class="mb-10">
-                <div class="flex items-center gap-3 mb-8">
-                  <div
-                    class="w-14 h-14 bg-gradient-to-br from-blue-500 via-blue-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
-                    <i class="pi pi-bolt text-white text-3xl"></i>
-                  </div>
-                  <div>
-                    <h1 class="text-3xl font-bold text-gray-900 tracking-tight">UtiliPay</h1>
-                    <p class="text-blue-600 text-sm font-medium">Smart Utility Management</p>
-                  </div>
-                </div>
-
-                <div class="space-y-2">
-                  <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Welcome Back</h2>
-                  <p class="text-gray-600 text-lg">Sign in to continue your journey</p>
-                </div>
+          <!-- Features -->
+          <div class="space-y-4">
+            <div class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm">
+              <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <i class="pi pi-check text-green-600 text-xl"></i>
               </div>
+              <div>
+                <h4 class="font-semibold text-gray-900">Instant Payments</h4>
+                <p class="text-sm text-gray-600">Process payments in seconds</p>
+              </div>
+            </div>
 
-              <!-- Login Form -->
-              <form @submit.prevent="handleLogin" class="space-y-6">
+            <div class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm">
+              <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <i class="pi pi-shield text-blue-600 text-xl"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900">Secure Transactions</h4>
+                <p class="text-sm text-gray-600">Bank-level security guaranteed</p>
+              </div>
+            </div>
 
-                <!-- Email Field -->
-                <div class="space-y-2">
-                  <label for="email" class="block text-sm font-semibold text-gray-700">
-                    Email Address
-                  </label>
-                  <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                      <i class="pi pi-envelope text-gray-400"></i>
-                    </div>
-                    <InputText   v-model="email" type="email" placeholder="your@email.com"
-                      class="w-full pl-12 pr-4 py-3.5 bg-gray-50   rounded-xl text-gray-900 transition-all duration-200"
-                      required />
+            <div class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm">
+              <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <i class="pi pi-gift text-orange-600 text-xl"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900">Earn Cashback</h4>
+                <p class="text-sm text-gray-600">Get rewards on every payment</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Pane - Login Form -->
+      <div class="flex items-center justify-center p-6 lg:p-12 bg-gradient-to-br from-blue-500 to-blue-600">
+        <div class="w-full max-w-md">
+
+          <!-- Logo & Header -->
+          <div class="text-center mb-10">
+            <div class="inline-flex items-center gap-2 mb-6">
+              <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg">
+                <i class="pi pi-bolt text-blue-600 text-2xl"></i>
+              </div>
+              <h1 class="text-3xl font-bold text-white">BeSoft</h1>
+            </div>
+            <p class="text-blue-100 text-sm">only if you want the best</p>
+            <h2 class="text-2xl font-bold text-white mt-6">Real-time Cashback on Every Payment</h2>
+          </div>
+
+          <!-- Login Card -->
+          <div class="bg-white rounded-3xl p-8 shadow-2xl">
+            <h3 class="text-3xl font-bold text-blue-600 text-center mb-2">Sign In</h3>
+            <p class="text-center text-gray-600 text-sm mb-8">Enter your phone number to continue</p>
+
+            <!-- Error Message -->
+            <div v-if="errorMessage" class="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl flex items-start gap-3">
+              <i class="pi pi-exclamation-circle text-red-500 text-lg mt-0.5"></i>
+              <div class="flex-1">
+                <p class="text-sm font-medium text-red-800">{{ errorMessage }}</p>
+              </div>
+              <button @click="errorMessage = ''" class="text-red-400 hover:text-red-600">
+                <i class="pi pi-times text-sm"></i>
+              </button>
+            </div>
+
+            <form @submit.prevent="handleLogin" class="space-y-6">
+
+              <!-- Phone Number -->
+              <div class="space-y-2">
+                <label class="block text-sm font-semibold text-gray-700">
+                  Phone number
+                  <span class="text-red-500">*</span>
+                </label>
+                <div class="flex gap-2">
+                  <div class="relative w-32">
+                    <select v-model="countryCode"
+                      class="w-full px-3 py-3.5 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 appearance-none pr-8 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all">
+                      <option value="+250">🇷🇼 +250</option>
+                      <option value="+1">🇺🇸 +1</option>
+                      <option value="+44">🇬🇧 +44</option>
+                      <option value="+254">🇰🇪 +254</option>
+                      <option value="+256">🇺🇬 +256</option>
+                      <option value="+255">🇹🇿 +255</option>
+                    </select>
+                    <i
+                      class="pi pi-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs pointer-events-none"></i>
                   </div>
+                  <InputText v-model="phoneNumber" type="tel" placeholder="785194263"
+                    class="flex-1 px-4 py-3.5 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                    :class="{ 'border-red-500 focus:border-red-500 focus:ring-red-500/20': phoneError }"
+                    @input="phoneError = ''" required />
                 </div>
-
-                <!-- Password Field -->
-                <div class="space-y-2">
-                  <label for="password" class="block text-sm font-semibold text-gray-700">
-                    Password
-                  </label>
-                  <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
-                      <i class="pi pi-lock text-gray-400"></i>
-                    </div>
-                    <Password id="password" v-model="password" placeholder="Enter your password" :feedback="false"
-                      toggleMask class="w-full password-input-light"
-                      inputClass="w-full pl-12 pr-12 py-3.5 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-200"
-                      required />
-                  </div>
-                </div>
-
-                <!-- Remember & Forgot -->
-                <div class="flex items-center justify-between text-sm">
-                  <label class="flex items-center gap-2 cursor-pointer group">
-                    <input type="checkbox"
-                      class="w-4 h-4 text-blue-600 bg-gray-50 border-gray-300 rounded focus:ring-blue-500 transition-all">
-                    <span class="text-gray-600 group-hover:text-gray-900 transition-colors">Remember me</span>
-                  </label>
-                  <a href="#" class="text-blue-600 hover:text-blue-700 font-semibold transition-colors relative group">
-                    Forgot Password?
-                    <span
-                      class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
-                  </a>
-                </div>
-
-                <!-- Submit Button -->
-                <button type="submit"
-                  class="w-full relative group overflow-hidden rounded-xl py-4 px-6 font-semibold text-white transition-all duration-300 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] bg-gradient-to-r from-blue-500 via-blue-600 to-purple-600 hover:from-blue-600 hover:via-blue-700 hover:to-purple-700">
-                  <span class="relative flex items-center justify-center gap-2">
-                    <span>Sign In</span>
-                    <i class="pi pi-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
-                  </span>
-                </button>
-
-                
-
-                <!-- Sign Up Link -->
-                <p class="text-center text-gray-600 text-sm mt-8">
-                  Don't have an account?
-                  <a href="#"
-                    class="text-blue-600 hover:text-blue-700 font-semibold ml-1 transition-colors relative group">
-                    Sign up
-                    <span
-                      class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
-                  </a>
+                <p v-if="phoneError" class="text-sm text-red-600 flex items-center gap-1.5">
+                  <i class="pi pi-exclamation-circle text-xs"></i>
+                  {{ phoneError }}
                 </p>
-              </form>
-            </div>
+                <p v-else class="text-xs text-gray-500">
+                  Enter your phone number without country code
+                </p>
+              </div>
 
-            <!-- Trust Indicators -->
-            <div class="mt-8 flex items-center justify-center gap-8 text-gray-500 text-sm">
-              <div class="flex items-center gap-2">
-                <i class="pi pi-shield text-blue-600"></i>
-                <span>Secure Login</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <i class="pi pi-lock text-blue-600"></i>
-                <span>256-bit Encryption</span>
-              </div>
-            </div>
+              <!-- Submit Button -->
+              <button type="submit" :disabled="isLoading"
+                class="w-full py-4 px-6 bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white font-bold rounded-xl transition-all duration-300 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] text-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2">
+                <i v-if="isLoading" class="pi pi-spin pi-spinner"></i>
+                <span>{{ isLoading ? 'Signing In...' : 'Sign In' }}</span>
+              </button>
+
+              <!-- Register Link -->
+              <p class="text-center text-gray-700 text-sm pt-4">
+                Don't have an account?
+                <a href="#"
+                  class="font-medium text-gray-900 hover:text-blue-600 transition-colors italic underline ml-1">
+                  Register
+                </a>
+              </p>
+            </form>
           </div>
 
-          <!-- Right Pane - Enhanced Carousel -->
-          <div class="order-1 lg:order-2 hidden lg:block">
-            <div class="bg-white rounded-3xl p-8     border-gray-200">
-              <Carousel :value="slides" :numVisible="1" :numScroll="1" :circular="true" :autoplayInterval="5000"
-                class="custom-carousel-light">
-                <template #item="slotProps">
-                  <div class="space-y-8">
-                    <!-- Image with Overlay -->
-                    <div class="relative rounded-2xl overflow-hidden shadow-lg group">
-                      <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent z-10">
-                      </div>
-                      <img :src="slotProps.data.image" :alt="slotProps.data.title"
-                        class="w-full h-96 object-cover transform group-hover:scale-105 transition-transform duration-700" />
-                      <!-- Floating Badge -->
-                      <div class="absolute top-6 right-6 z-20">
-                        <div
-                          class="bg-white/95 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
-                          <i :class="slotProps.data.badge.icon" class="mr-2 text-blue-600"></i>
-                          {{ slotProps.data.badge.text }}
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Content -->
-                    <div class="space-y-4 px-2">
-                      <div class="flex items-center gap-3">
-                        <div
-                          class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-md">
-                          <i :class="slotProps.data.icon" class="text-white text-xl"></i>
-                        </div>
-                        <h3 class="text-3xl font-bold text-gray-900">{{ slotProps.data.title }}</h3>
-                      </div>
-
-                      <p class="text-gray-600 text-sm leading-relaxed">
-                        {{ slotProps.data.content }}
-                      </p>
-
-                      <!-- Features -->
-                      <div class="grid grid-cols-2 gap-3 pt-4">
-                        <div v-for="feature in slotProps.data.features" :key="feature"
-                          class="flex items-center gap-2 text-sm text-gray-700">
-                          <i class="pi pi-check-circle text-blue-600"></i>
-                          <span>{{ feature }}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </template>
-              </Carousel>
-            </div>
-          </div>
+          <!-- Privacy Info -->
+          <p class="text-center text-white/80 text-xs mt-6">
+            By signing in, you agree to our
+            <a href="#" class="underline hover:text-white">Terms of Service</a> and
+            <a href="#" class="underline hover:text-white">Privacy Policy</a>
+          </p>
 
         </div>
       </div>
+
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useAuthStore } from '~/stores/auth';
 import { useRouter } from 'vue-router';
 
 const authStore = useAuthStore();
 const router = useRouter();
 
-const email = ref('');
-const password = ref('');
+const countryCode = ref('+250');
+const phoneNumber = ref('');
+const isLoading = ref(false);
+const errorMessage = ref('');
+const phoneError = ref('');
 
-const slides = ref([
-  {
-    title: "Pay Your Bills Seamlessly",
-    content: "Manage all your utility payments in one secure platform with real-time tracking and instant confirmations. Experience the future of bill management.",
-    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&h=600&fit=crop",
-    icon: "pi pi-bolt",
-    badge: { icon: "pi pi-star-fill", text: "Most Popular" },
-    features: ["Real-time tracking", "Instant confirmations", "Auto-pay setup", "Payment history"]
-  },
-  {
-    title: "Smart Payment Solutions",
-    content: "Set up automatic payments, track your usage patterns, and never miss a due date with our intelligent reminder system and predictive analytics.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
-    icon: "pi pi-chart-line",
-    badge: { icon: "pi pi-sparkles", text: "AI Powered" },
-    features: ["Smart reminders", "Usage analytics", "Budget insights", "Cost predictions"]
-  },
-  {
-    title: "Secure & Fast Transactions",
-    content: "Bank-level security with instant payment processing. Your financial data is always protected with military-grade encryption and multi-factor authentication.",
-    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=600&fit=crop",
-    icon: "pi pi-shield",
-    badge: { icon: "pi pi-verified", text: "Verified Secure" },
-    features: ["256-bit encryption", "2FA security", "Fraud protection", "Instant processing"]
+// Computed full phone number
+const fullPhoneNumber = computed(() => {
+  const cleaned = phoneNumber.value.replace(/\D/g, '');
+  return countryCode.value.replace('+', '') + cleaned;
+});
+
+const validatePhoneNumber = () => {
+  const cleaned = phoneNumber.value.replace(/\D/g, '');
+
+  if (!cleaned) {
+    phoneError.value = 'Phone number is required';
+    return false;
   }
-]);
 
-const handleLogin = () => {
-  if (authStore.login(email.value, password.value)) {
-    router.push('/dashboard');
+  if (cleaned.length < 9) {
+    phoneError.value = 'Phone number is too short';
+    return false;
+  }
+
+  if (cleaned.length > 12) {
+    phoneError.value = 'Phone number is too long';
+    return false;
+  }
+
+  phoneError.value = '';
+  return true;
+};
+
+const handleLogin = async () => {
+  // Reset errors
+  errorMessage.value = '';
+  phoneError.value = '';
+
+  // Validate phone number
+  if (!validatePhoneNumber()) {
+    return;
+  }
+
+  isLoading.value = true;
+
+  try {
+    const success = await authStore.login(fullPhoneNumber.value);
+
+    if (success) {
+      // Show success message briefly before redirect
+      setTimeout(() => {
+        router.push('/dashboard');
+      }, 500);
+    } else {
+      errorMessage.value = 'Login failed. Please check your phone number and try again.';
+    }
+  } catch (error) {
+    console.error('Login error:', error);
+    errorMessage.value = error.message || 'An unexpected error occurred. Please try again.';
+  } finally {
+    isLoading.value = false;
   }
 };
 </script>
 
 <style scoped>
-/* Social Buttons */
-.social-btn-light {
-  @apply p-4 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 hover:bg-gray-100 hover:border-blue-500 hover:text-blue-600 transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-md;
-}
-
-/* Input Styles */
-:deep(.p-password) {
-  width: 100%;
-}
-
-:deep(.p-password-input) {
-  width: 100%;
-}
-
+/* Custom styling */
 :deep(.p-inputtext:focus) {
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
   border-color: #3b82f6 !important;
 }
 
-/* Carousel Custom Styles */
-:deep(.p-carousel-indicators) {
-  padding: 1.5rem 0 0;
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
+/* Error state styling */
+:deep(.p-inputtext.border-red-500:focus) {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+  border-color: #ef4444 !important;
 }
 
-:deep(.p-carousel-indicator button) {
-  width: 2.5rem;
-  height: 0.5rem;
-  border-radius: 1rem;
-  background: #e5e7eb;
-  transition: all 0.3s ease;
+/* Spinner animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-:deep(.p-carousel-indicator button:hover) {
-  background: #d1d5db;
-  transform: scaleX(1.2);
-}
-
-:deep(.p-carousel-indicator.p-highlight button) {
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  width: 3rem;
-}
-
-:deep(.p-carousel-prev),
-:deep(.p-carousel-next) {
-  display: none;
+.pi-spin {
+  animation: spin 1s linear infinite;
 }
 </style>
