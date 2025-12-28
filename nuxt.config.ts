@@ -161,7 +161,7 @@ export default defineNuxtConfig({
 
     // Public keys (exposed to client)
     public: {
-      baseUrl: process.env.NUXT_PUBLIC_BASE_URL || 'http://localhost:8080/api/v1',
+      baseUrl: process.env.NUXT_PUBLIC_BASE_URL || 'http://localhost:8089/api/v1',
       appName: 'BeSoft Utility Payment',
       appVersion: '1.0.0'
     }
